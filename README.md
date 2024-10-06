@@ -1,6 +1,8 @@
 # tda-tp-async
 
-Integrantes
+## Integrantes
+
 Nombre Apellido, Padron
+
 Lucas Ricardo Williams, 103018
 
