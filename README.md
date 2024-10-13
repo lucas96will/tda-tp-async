@@ -37,4 +37,8 @@ Este juego consiste de "dos" jugadores, Sophia y Mateo, donde seleccionan moneda
     ```bash
     python src/main/juego.py "PATH_AL_ARCHIVO_CON_VALORES_DE_MONEDAS"
     ```
-
+4. La salida esperada del programa, ejemplo con el set de datos de 25 monedas.
+    ```
+    ['Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Primera moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Primera moneda para Mateo', 'Primera moneda para Sophia', 'Primera moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Primera moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia']
+    Ganancia de Sophia: 9635
+    ```
