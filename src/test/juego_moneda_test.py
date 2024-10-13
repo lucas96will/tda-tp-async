@@ -10,7 +10,7 @@ main_dir = os.path.abspath(os.path.join(current_dir, '../main'))
 # Add the main directory to the system path
 sys.path.insert(0, main_dir)
 
-from juego_monedas import juega_sofia
+from juego_monedas import juego_monedas
 
 class TestJuegoMonedas(unittest.TestCase):
     
@@ -28,7 +28,7 @@ class TestJuegoMonedas(unittest.TestCase):
         
         monedas = [50, 50, 15, 50, 25]
 
-        acciones_obtenidas, ganancia = juega_sofia(monedas)      
+        acciones_obtenidas, ganancia = juego_monedas(monedas)      
         print(acciones_obtenidas)
 
         self.assertEqual(acciones_obtenidas, acciones_esperadas)

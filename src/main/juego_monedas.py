@@ -1,17 +1,18 @@
 import sys
-import os
-import collections
 
 def leer_archivo(dir):
     monedas = []
     try:
         with open(dir, 'r') as archivo:
-            lineas = archivo.readlines()
-            if len(lineas) >= 2:
-            # Seleccionar la segunda línea y quitar el salto de línea al final
-                segunda_linea = lineas[1].strip()
-                valores = segunda_linea.split(';')
+             for linea in archivo:
+                linea = linea.strip()
+                # Saltar líneas que comienzan con #
+                if linea.startswith('#') or not linea:
+                    continue
+                # Procesar solo la primera línea válida (que no sea comentario)
+                valores = linea.split(';')
                 monedas = [int(num) for num in valores]
+                break  # Romper el bucle después de la primera línea válida
         return monedas
     except FileNotFoundError:
         print(f"El archivo {dir} no se encontró.")
@@ -19,29 +20,44 @@ def leer_archivo(dir):
         print(f"Ocurrió un error al leer el archivo: {e}")
 
 
-def juega_sofia(monedas):
+def obtener_mayor_moneda(monedas):
+    valor_moneda = 0
+    resultado = ""
+    if monedas[0] > monedas[-1]:
+        valor_moneda = monedas.pop(0)
+        resultado = "Primera moneda para Sophia"
+    else:
+        valor_moneda = monedas.pop()
+        resultado = "Ultima moneda para Sophia"
+    return valor_moneda, resultado
 
+def obtener_menor_moneda(monedas):
+    valor_moneda = 0
+    resultado = ""
+    if monedas[0] >= monedas[-1]:
+        monedas.pop()
+        resultado = "Ultima moneda para Mateo"
+    else:
+        monedas.pop(0)
+        resultado = "Primera moneda para Mateo"
+    return valor_moneda, resultado
+
+def juego_monedas(monedas):
     solucion = []
     suma_sofia = 0
-    turno = 1
+    turno_sophia = True
 
     while monedas:
-        if turno % 2 != 0:
-            if monedas[0] > monedas[-1]:
-                suma_sofia += monedas.pop(0)
-                solucion.append("Primera moneda para Sophia")
-            else:
-                suma_sofia += monedas.pop()
-                solucion.append("Ultima moneda para Sophia")
-            turno += 1
+        if turno_sophia:
+            valor_moneda, resultado = obtener_mayor_moneda(monedas)
+            suma_sofia += valor_moneda
+            solucion.append(resultado)
+            turno_sophia = not turno_sophia
             continue
-        if monedas[0] >= monedas[-1]:
-            monedas.pop()
-            solucion.append("Ultima moneda para Mateo")
-        else:
-            monedas.pop(0)
-            solucion.append("Primera moneda para Mateo")
-        turno += 1
+        _, resultado = obtener_menor_moneda(monedas)
+        solucion.append(resultado)
+        turno_sophia = not turno_sophia
+
 
     return solucion, suma_sofia
 
@@ -57,7 +73,7 @@ if __name__ == "__main__":
     print("Monedas iniciales")
     print(monedas)
 
-    solucion, suma_sofia = juega_sofia(monedas)
+    solucion, suma_sofia = juego_monedas(monedas)
 
     print(solucion)
     print("Ganancia de Sophia: ", suma_sofia)
