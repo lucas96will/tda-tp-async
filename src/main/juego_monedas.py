@@ -1,4 +1,5 @@
 import sys
+from collections import deque
 
 def leer_archivo(dir):
     monedas = []
@@ -21,45 +22,40 @@ def leer_archivo(dir):
 
 
 def obtener_mayor_moneda(monedas):
-    valor_moneda = 0
-    resultado = ""
     if monedas[0] > monedas[-1]:
-        valor_moneda = monedas.pop(0)
-        resultado = "Primera moneda para Sophia"
+        return monedas.popleft(), "Primera moneda para Sophia"
     else:
-        valor_moneda = monedas.pop()
-        resultado = "Ultima moneda para Sophia"
-    return valor_moneda, resultado
+        return monedas.pop(), "Ultima moneda para Sophia"
 
 def obtener_menor_moneda(monedas):
-    valor_moneda = 0
-    resultado = ""
     if monedas[0] >= monedas[-1]:
-        monedas.pop()
-        resultado = "Ultima moneda para Mateo"
+        return monedas.pop(), "Ultima moneda para Mateo"
     else:
-        monedas.pop(0)
-        resultado = "Primera moneda para Mateo"
-    return valor_moneda, resultado
+        return monedas.popleft(), "Primera moneda para Mateo"
 
 def juego_monedas(monedas):
     solucion = []
-    suma_sofia = 0
+    suma_sophia = 0
+    suma_mateo = 0
     turno_sophia = True
 
+    monedas = deque(monedas)
+
+    append_solucion = solucion.append  # Local variable for faster access
+
+    append_solucion = solucion.append  # Local variable for faster access
     while monedas:
         if turno_sophia:
             valor_moneda, resultado = obtener_mayor_moneda(monedas)
-            suma_sofia += valor_moneda
-            solucion.append(resultado)
-            turno_sophia = not turno_sophia
-            continue
-        _, resultado = obtener_menor_moneda(monedas)
-        solucion.append(resultado)
+            suma_sophia += valor_moneda
+            append_solucion(resultado)
+        else:
+            valor_moneda, resultado = obtener_menor_moneda(monedas)
+            suma_mateo += valor_moneda
+            append_solucion(resultado)
         turno_sophia = not turno_sophia
 
-
-    return solucion, suma_sofia
+    return solucion, suma_sophia, suma_mateo
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -73,7 +69,7 @@ if __name__ == "__main__":
     print("Monedas iniciales")
     print(monedas)
 
-    solucion, suma_sofia = juego_monedas(monedas)
+    solucion, suma_sofia, _ = juego_monedas(monedas)
 
     print(solucion)
     print("Ganancia de Sophia: ", suma_sofia)
