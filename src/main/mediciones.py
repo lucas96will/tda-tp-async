@@ -12,12 +12,9 @@ from juego_monedas import juego_monedas
 
 
 def get_random_array(size: int):
-    return np.random.randint(0, 50000, size).tolist()
+    return np.random.randint(1, 50000, size).tolist()
 
-
-
-if __name__ == "__main__":
-
+def mediciones_primera_parte_greedy():
     # Siempre seteamos la seed de aleatoridad para que los # resultados sean reproducibles
     seed(12345)
     np.random.seed(12345)
@@ -68,4 +65,7 @@ if __name__ == "__main__":
 
     plt.show()
     fig.savefig('greedy_complejidad_error.png')
+
+if __name__ == "__main__":
+    mediciones_primera_parte_greedy()
 
