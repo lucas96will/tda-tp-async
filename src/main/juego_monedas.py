@@ -1,25 +1,8 @@
 import sys
+import os
 from collections import deque
 
-def leer_archivo(dir):
-    monedas = []
-    try:
-        with open(dir, 'r') as archivo:
-             for linea in archivo:
-                linea = linea.strip()
-                # Saltar líneas que comienzan con #
-                if linea.startswith('#') or not linea:
-                    continue
-                # Procesar solo la primera línea válida (que no sea comentario)
-                valores = linea.split(';')
-                monedas = [int(num) for num in valores]
-                break  # Romper el bucle después de la primera línea válida
-        return monedas
-    except FileNotFoundError:
-        print(f"El archivo {dir} no se encontró.")
-    except Exception as e:
-        print(f"Ocurrió un error al leer el archivo: {e}")
-
+from data_loader import cargar_set_datos
 
 def obtener_mayor_moneda(monedas):
     if monedas[0] > monedas[-1]:
@@ -65,7 +48,7 @@ if __name__ == "__main__":
     print(dir)
     # Descomentar si no toma los argumentos bien para testear
     # dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../primera-parte-set-datos/25.txt'))
-    monedas = leer_archivo(dir)
+    monedas = cargar_set_datos(dir)
     print("Monedas iniciales")
     print(monedas)
 

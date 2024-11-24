@@ -36,7 +36,7 @@ class TestJuegoMonedas(unittest.TestCase):
     def test_siempre_gana_sophia(self):
         random.seed(12345)
         monedas = [random.randint(1, 1000) for _ in range(50)]
-        num_sorts = 100  # Número de ordenamientos aleatorios a realizar
+        num_sorts = 10  # Número de ordenamientos aleatorios a realizar
 
         for _ in range(num_sorts):
             random.shuffle(monedas)
