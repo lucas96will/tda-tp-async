@@ -47,7 +47,8 @@ def reconstruccion(coins, opt):
     i = 0
 
     while i <= j:
-        # Obtengo la mejor opcion del lado derecho, la comparo con la mejor opcion. Si no es la misma, avanzo por la otra opcion.
+        # Obtengo la mejor opcion del lado derecho, la comparo con la mejor opcion. 
+        # Si no es la misma, avanzo por la otra opcion.
         sophia_der_mateo_izq = coins[j] + opt[i][j-2] if coins[i] < coins[j-1] and i <= j-2 else 0
         sophia_der_mateo_der = coins[j] + opt[i+1][j-1] if coins[i] >= coins[j-1] and i+1 <= j-1 else 0
         opcion_der = max(sophia_der_mateo_izq, sophia_der_mateo_der)
