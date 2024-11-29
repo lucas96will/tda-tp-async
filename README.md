@@ -46,7 +46,9 @@ Este juego consiste de "dos" jugadores, Sophia y Mateo, donde seleccionan moneda
    ```
 
 4. La salida esperada del programa, ejemplo con el set de datos de 25 monedas de la primera parte
+
    ```
-   ['Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Primera moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Primera moneda para Sophia', 'Primera moneda para Mateo', 'Primera moneda para Sophia', 'Primera moneda para Mateo', 'Ultima moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia', 'Primera moneda para Mateo', 'Primera moneda para Sophia', 'Ultima moneda para Mateo', 'Ultima moneda para Sophia']
-   Ganancia de Sophia: 9635
+   Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Primera moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Primera moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Primera moneda para Mateo; Última moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia; Primera moneda para Mateo; Primera moneda para Sophia; Última moneda para Mateo; Última moneda para Sophia
+   Ganancia de Sophia:  9635
+
    ```
