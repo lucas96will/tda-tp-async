@@ -1,18 +1,19 @@
 import sys
-import os
 from collections import deque
-
 from data_loader import cargar_set_datos
+
+
+path_datos = "../../primera-parte-set-datos/"
 
 def obtener_mayor_moneda(monedas):
     if monedas[0] > monedas[-1]:
         return monedas.popleft(), "Primera moneda para Sophia"
     else:
-        return monedas.pop(), "Ultima moneda para Sophia"
+        return monedas.pop(), "Última moneda para Sophia"
 
 def obtener_menor_moneda(monedas):
     if monedas[0] >= monedas[-1]:
-        return monedas.pop(), "Ultima moneda para Mateo"
+        return monedas.pop(), "Última moneda para Mateo"
     else:
         return monedas.popleft(), "Primera moneda para Mateo"
 
@@ -38,24 +39,33 @@ def juego_monedas(monedas):
             append_solucion(resultado)
         turno_sophia = not turno_sophia
 
-    return solucion, suma_sophia, suma_mateo
+    return "; ".join(solucion), suma_sophia, suma_mateo
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Debe ingresar la direccion de un archivo de texto")
+    nombre_archivo = ""
+    
+    if len(sys.argv) > 1:
+        nombre_archivo = sys.argv[1]
+    else:
+        nombre_archivo = input("Ingrese el nombre del archivo contenedor de datos: ")
 
-    dir = sys.argv[1]
-    print(dir)
-    # Descomentar si no toma los argumentos bien para testear
-    # dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../primera-parte-set-datos/25.txt'))
-    monedas = cargar_set_datos(dir)
-    print("Monedas iniciales")
-    print(monedas)
+    monedas = cargar_set_datos(nombre_archivo)
+    solucion, suma_sofia, suma_mateo = juego_monedas(monedas)
 
-    solucion, suma_sofia, _ = juego_monedas(monedas)
+    total_monedas = sum(monedas)
 
     print(solucion)
     print("Ganancia de Sophia: ", suma_sofia)
+    
+    assert (
+            suma_sofia + suma_mateo == total_monedas
+    ),f"la suma de puntajes ({suma_sofia + suma_mateo}) no coincide con el total de las monedas ({total_monedas})."
+
+    assert (
+            suma_sofia >= suma_mateo
+    ),f"Pierde Sophia con un valor acumulado de: ({suma_sofia}) y el valor acumulado de Mateo ({suma_mateo}) )."
+    
+
 
 
     

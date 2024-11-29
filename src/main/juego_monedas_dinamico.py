@@ -2,7 +2,9 @@ from collections import deque
 import time
 from data_loader import cargar_set_datos
 import os
+import sys
 
+path_datos = "../../segunda-parte-set-datos/"
 
 def juego_monedas_dinamico(coins):
     n = len(coins)
@@ -37,9 +39,8 @@ def juego_monedas_dinamico(coins):
 
     puntaje_sophia = opt[0][n-1]
     puntaje_mateo = sum(coins) - puntaje_sophia
-
+    
     return puntaje_sophia, puntaje_mateo, reconstruccion(coins, opt)
-
 
 def reconstruccion(coins, opt):
     elecciones = []
@@ -76,21 +77,28 @@ def reconstruccion(coins, opt):
 
 
 if __name__ == "__main__":
+    nombre_archivo = ""
+
+    if len(sys.argv) > 1:
+        nombre_archivo = sys.argv[1]
+    else:
+        nombre_archivo = input("Ingrese el nombre del archivo contenedor de datos: ")
+
 
     start_time = time.time()
 
-    dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../segunda-parte-set-datos/20.txt'))
-    monedas = cargar_set_datos(dir)
+    monedas = cargar_set_datos(nombre_archivo)
 
     ganancia_sophia, ganancia_mateo, choices = juego_monedas_dinamico(monedas)
 
-    print("Recuento:")
-    print(f"Ganancia Sophia: {ganancia_sophia}")
-    print(f"Ganancia Mateo: {ganancia_mateo}")
-
+    total_monedas = ganancia_sophia + ganancia_mateo
+    assert (
+            ganancia_sophia + ganancia_mateo == total_monedas
+    ),f"la suma de puntajes ({ganancia_sophia + ganancia_mateo}) no coincide con el total de las monedas ({total_monedas})."
 
     print(choices)
-
+    print(f"Ganancia Sophia: {ganancia_sophia}")
+    print(f"Ganancia Mateo: {ganancia_mateo}")
     end_time = time.time()
     execution_time = end_time - start_time
     # print(f"Tiempo de ejecución: {execution_time:.6f} segundos")
