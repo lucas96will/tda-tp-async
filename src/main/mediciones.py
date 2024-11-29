@@ -17,6 +17,9 @@ def get_random_array(size: int):
     return np.random.randint(1, 1000, size).tolist()
 
 def mediciones_primera_parte_greedy():
+
+    def get_random_array_s(size: int):
+        return np.random.randint(1, 100000, size).tolist()
     # Siempre seteamos la seed de aleatoridad para que los # resultados sean reproducibles
     seed(12345)
     np.random.seed(12345)
@@ -26,7 +29,7 @@ def mediciones_primera_parte_greedy():
     # Tamaño mínimo=100, tamaño máximo=100.000 , cantidad de puntos=20
     x = np.linspace(100, 100_000, 50).astype(int)
 
-    results_greedy = time_algorithm(juego_monedas, x, lambda s: [get_random_array(s)])
+    results_greedy = time_algorithm(juego_monedas, x, lambda s: [get_random_array_s(s)])
 
     f_n = lambda x, c1, c2: c1 * x + c2
     f_n2 = lambda x, c1, c2: c1 * x**2 + c2
@@ -67,6 +70,41 @@ def mediciones_primera_parte_greedy():
 
     plt.show()
     fig.savefig('greedy_complejidad_error.png')
+
+def mediciones_primera_parte_variabilidad():
+    def get_random_array_alta_variabilidad(size: int):
+        return np.random.randint(1, 100000, size).tolist()
+    def get_random_array_baja_variabilidad(size: int):
+        return np.random.randint(1, 10, size).tolist()
+    # Siempre seteamos la seed de aleatoridad para que los # resultados sean reproducibles
+    seed(12345)
+    np.random.seed(12345)
+    sns.set_theme()
+
+    # La variable x van a ser los valores del eje x de los gráficos en todo el notebook
+    # Tamaño mínimo=100, tamaño máximo=100.000 , cantidad de puntos=20
+    x = np.linspace(100, 100_000, 50).astype(int)
+
+    results_greedy_high = time_algorithm(juego_monedas, x, lambda s: [get_random_array_alta_variabilidad(s)])
+    results_greedy_low = time_algorithm(juego_monedas, x, lambda s: [get_random_array_baja_variabilidad(s)])
+
+    f_n = lambda x, c1, c2: c1 * x + c2
+
+    ax: plt.Axes
+    fig, ax = plt.subplots()
+    ax.plot(x, [results_greedy_high[n] for n in x], 'g--', label="Medición alta variabilidad")
+    ax.plot(x, [results_greedy_low[n] for n in x], 'r--', label="Medición baja variabilidad")
+
+    ax.set_title('Tiempo de ejecución con diferente variabilidad')
+    ax.set_xlabel('Tamaño del array')
+    ax.set_ylabel('Tiempo de ejecución (s)')
+    ax.legend()
+    None
+
+    plt.show()
+    fig.savefig('greedy_variabilidad.png')
+
+
 
 def mediciones_segunda_parte_dinamico():
     # Siempre seteamos la seed de aleatoridad para que los # resultados sean reproducibles
@@ -194,8 +232,9 @@ if __name__ == "__main__":
     start_time = time.time()
     # mediciones_primera_parte_greedy()
     # mediciones_segunda_parte_dinamico()
-    mediciones_segunda_parte_variabilidad_alta()
-    mediciones_segunda_parte_variabilidad_baja()
+    #mediciones_segunda_parte_variabilidad_alta()
+    #mediciones_segunda_parte_variabilidad_baja()
+    mediciones_primera_parte_variabilidad()
     end_time = time.time()
     elapsed_time = end_time - start_time
     print(f"Elapsed time: {elapsed_time:.2f} seconds")
