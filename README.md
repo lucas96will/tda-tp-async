@@ -6,13 +6,7 @@ Nombre Apellido, Padron
 
 Lucas Ricardo Williams, 103018
 
-Rodrigo Ladaga, 100188
-
 Gaston Proz, 105868
-
-Nazareno Napolitano, 107910
-
-Ramiro Besse Molina, 110657
 
 # Juego de Monedas
 
@@ -36,13 +30,23 @@ Este juego consiste de "dos" jugadores, Sophia y Mateo, donde seleccionan moneda
 3. Ejecutar el programa
 
    ```bash
-   python src/main/juego_moneda.py "PATH_AL_ARCHIVO_CON_VALORES_DE_MONEDAS"
+   El path utilizado toma el root de donde lo ejecutas.
+
+   python src/main/juego_moneda.py "PATH_AL_ARCHIVO"
+
+   Ejecutandolo desde TDA-TP-ASYNC
 
    Ejemplo primera parte
    python src/main/juego_moneda.py primera-parte-set-datos/25.txt
 
    Ejemplo segunda parte
    python src/main/juego_moneda_dinamico.py segunda-parte-set-datos/20.txt
+
+   Ejemplo tercera parte
+   python src/main/batalla_naval.py tercera-parte-set-datos/5_5_6.txt
+
+   Ejemplo tercera parte
+   python src/main/batalla_naval_greedy.py tercera-parte-set-datos/5_5_6.txt
    ```
 
 4. La salida esperada del programa, ejemplo con el set de datos de 25 monedas de la primera parte
@@ -52,3 +56,5 @@ Este juego consiste de "dos" jugadores, Sophia y Mateo, donde seleccionan moneda
    Ganancia de Sophia:  9635
 
    ```
+
+5. Se pueden ver los resultados esperados en los datasets de cada parte.
