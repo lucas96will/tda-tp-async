@@ -8,10 +8,6 @@ Lucas Ricardo Williams, 103018
 
 Gaston Proz, 105868
 
-# Juego de Monedas
-
-Este juego consiste de "dos" jugadores, Sophia y Mateo, donde seleccionan monedas de una lista, en cada turno se puede elegir entre la primer y ultima moneda. Sophia siempre elige la mayor moneda en su turno, y como Mateo es todavia muy pequeño, Sophia le elige la moneda en su turno, es buena hermana pero como es muy competitiva siempre elige la menor para el pequeño Mateo.
-
 ## Requisitos
 
 - Python 3.x
