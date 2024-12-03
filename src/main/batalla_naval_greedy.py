@@ -1,96 +1,49 @@
-import sys, time
+import sys
+import time
 from data_loader import cargar_set_datos_naval
 
-D_INCUMPLIDA = 1
-TABLERO = 0
 
-def batalla_naval(d_filas, d_columnas, barcos):
+def batalla_naval_greedy(d_filas, d_columnas, barcos):
     n = len(d_filas)
     m = len(d_columnas)
     tablero = [[0] * m for _ in range(n)]
     barcos.sort(reverse=True)
-    solucion = [tablero, float("inf")]
-    batalla_naval_bt(tablero, barcos, d_filas, d_columnas, solucion)
 
-    demanda_total = sum(d_filas) + sum(d_columnas)
-    demanda_cumplida = demanda_total - solucion[D_INCUMPLIDA]
+    for barco in barcos:
+        ubicado = False
 
-    return demanda_cumplida, demanda_total, solucion[TABLERO]
+        while not ubicado:
+            max_d_fil = max((d, i) for i, d in enumerate(d_filas))
+            max_d_col = max((d, j) for j, d in enumerate(d_columnas))
+            
+            # El barco es mas grande que la demanda
+            if max_d_fil[0] < barco and max_d_col[0] < barco:
+                break
 
-def batalla_naval_bt(
-    tablero, barcos, d_filas, d_columnas, solucion_parcial
-):
+            if max_d_fil[0] >= max_d_col[0]:
+                # Intenta ubicar por fila
+                i_fil = max_d_fil[1]
+                for i_col in range(m):
+                    #if intentar_ubicar_barco(tablero, m, n, barco, i_fil, i_col, True):
+                    if intentar_ubicar_barco(tablero, barco, i_fil, i_col, True, d_filas, d_columnas):
+                        ubicar_barco(tablero, barco, i_fil, i_col, d_filas, d_columnas, True)
+                        ubicado = True
+                        break
+            else:
+                # Intenta ubicar por columna
+                i_col = max_d_col[1]
+                for i_fil in range(n):
+                    #if intentar_ubicar_barco(tablero, m, n, barco, i_fil, i_col, False):
+                    if intentar_ubicar_barco(tablero, barco, i_fil, i_col, False, d_filas, d_columnas):
+                        ubicar_barco(tablero, barco, i_fil, i_col, d_filas, d_columnas, False)
+                        ubicado = True
+                        break
 
-    d_incumplida = sum(d_filas) + sum(d_columnas)
-    
-    if d_incumplida < solucion_parcial[D_INCUMPLIDA]:
-        solucion_parcial[TABLERO] = [list(fila) for fila in tablero]
-        solucion_parcial[D_INCUMPLIDA] = d_incumplida
+            # No se puede ubicar al barco
+            if not ubicado:
+                break
 
-    # Caso base
-    if not barcos:
-        return
-    # Poda si solución parcial es peor que la demanda incumplida maxima
-    if solucion_parcial[D_INCUMPLIDA] <= d_incumplida - sum(
-        barco * 2 for barco in barcos
-    ): return
-
-    # Sin barco
-    batalla_naval_bt(
-        tablero, barcos[1:], d_filas, d_columnas, solucion_parcial
-    )
-
-    # Con barco
-    for i in range(len(tablero)):
-        if d_filas[i] > 0:  # Hay demanda en la fila?
-            for j in range(len(tablero[0])):
-                if d_columnas[j] > 0:  # Hay demanda en la columna?
-                    # Pruebo con barco horizontal y vertical
-                    procesar_barco(
-                        tablero,
-                        barcos,
-                        i,
-                        j,
-                        d_filas,
-                        d_columnas,
-                        solucion_parcial,
-                        True,
-                    )
-                    procesar_barco(
-                        tablero,
-                        barcos,
-                        i,
-                        j,
-                        d_filas,
-                        d_columnas,
-                        solucion_parcial,
-                        False,
-                    )
-    
-
-def procesar_barco(
-    tablero,
-    barcos,
-    i,
-    j,
-    d_filas,
-    d_columnas,
-    solucion_parcial,
-    horizontal,
-):
-    if intentar_ubicar_barco(
-        tablero, barcos[0], i, j, horizontal, d_filas, d_columnas
-    ):
-        ubicar_barco(
-            tablero, barcos[0], i, j, d_filas, d_columnas, horizontal
-        )
-        batalla_naval_bt(
-            tablero, barcos[1:], d_filas, d_columnas, solucion_parcial
-        )
-        quitar_barco(
-            tablero, barcos[0], i, j, d_filas, d_columnas, horizontal
-        )
-
+    return d_filas, d_columnas, tablero
 
 def intentar_ubicar_barco(tablero, barcos, i_fil, i_col, horizontal, d_filas, d_columnas):
     n, m = len(tablero), len(tablero[0])
@@ -185,9 +138,12 @@ if __name__ == "__main__":
 
     demanda_filas, demanda_columnas, barcos = cargar_set_datos_naval(nombre_archivo)
     tiempo_inicio = time.time()
-    demanda_cumplida, demanda_total, tablero_final = batalla_naval(demanda_filas.copy(), demanda_columnas.copy(), barcos)
+    d_filas, d_columnas, tablero_final = batalla_naval_greedy(demanda_filas.copy(), demanda_columnas.copy(), barcos)
     tiempo_final = time.time()
 
+    # demanda cumplida es la suma * 2 de los 1s en el tablero
+    demanda_cumplida = sum(sum(fila) for fila in tablero_final) * 2
+    demanda_total = sum(demanda_filas) + sum(demanda_columnas)
     imprimir_juego_naval(tablero_final)
     print(f"Demanda cumplida: {demanda_cumplida}")
     print(f"Demanda incumplida: {demanda_total - demanda_cumplida}")

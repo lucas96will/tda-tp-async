@@ -1,0 +1,32 @@
+Archivo: 10_10_10.txt
+Duración: 0.086849 segundos
+Demanda cumplida: 40
+
+Archivo: 10_3_3.txt
+Duración: 0.000139 segundos
+Demanda cumplida: 6
+
+Archivo: 12_12_21.txt
+Duración: 0.874852 segundos
+Demanda cumplida: 46
+
+Archivo: 15_10_15.txt
+Duración: 0.049422 segundos
+Demanda cumplida: 40
+
+Archivo: 20_20_20.txt
+Duración: 0.814373 segundos
+Demanda cumplida: 104
+
+Archivo: 20_25_30.txt
+Duración: 1.395057 segundos
+Demanda cumplida: 172
+
+Archivo: 30_25_25.txt
+Duración: 216.284955 segundos
+Demanda cumplida: 202
+
+Archivo: 3_3_2.txt
+Duración: 0.000166 segundos
+Demanda cumplida: 4
+

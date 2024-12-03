@@ -5,17 +5,20 @@ from data_loader import cargar_set_datos
 
 path_datos = "../../primera-parte-set-datos/"
 
+
 def obtener_mayor_moneda(monedas):
     if monedas[0] > monedas[-1]:
         return monedas.popleft(), "Primera moneda para Sophia"
     else:
         return monedas.pop(), "Última moneda para Sophia"
 
+
 def obtener_menor_moneda(monedas):
     if monedas[0] >= monedas[-1]:
         return monedas.pop(), "Última moneda para Mateo"
     else:
         return monedas.popleft(), "Primera moneda para Mateo"
+
 
 def juego_monedas(monedas):
     solucion = []
@@ -41,9 +44,10 @@ def juego_monedas(monedas):
 
     return "; ".join(solucion), suma_sophia, suma_mateo
 
+
 if __name__ == "__main__":
     nombre_archivo = ""
-    
+
     if len(sys.argv) > 1:
         nombre_archivo = sys.argv[1]
     else:
@@ -56,16 +60,11 @@ if __name__ == "__main__":
 
     print(solucion)
     print("Ganancia de Sophia: ", suma_sofia)
-    
-    assert (
-            suma_sofia + suma_mateo == total_monedas
-    ),f"la suma de puntajes ({suma_sofia + suma_mateo}) no coincide con el total de las monedas ({total_monedas})."
 
     assert (
-            suma_sofia >= suma_mateo
-    ),f"Pierde Sophia con un valor acumulado de: ({suma_sofia}) y el valor acumulado de Mateo ({suma_mateo}) )."
-    
+        suma_sofia + suma_mateo == total_monedas
+    ), f"la suma de puntajes ({suma_sofia + suma_mateo}) no coincide con el total de las monedas ({total_monedas})."
 
-
-
-    
+    assert (
+        suma_sofia >= suma_mateo
+    ), f"Pierde Sophia con un valor acumulado de: ({suma_sofia}) y el valor acumulado de Mateo ({suma_mateo}) )."

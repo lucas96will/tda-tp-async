@@ -7,22 +7,22 @@ import sys
 # Get the current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # Construct the path to the main directory
-main_dir = os.path.abspath(os.path.join(current_dir, '../main'))
+main_dir = os.path.abspath(os.path.join(current_dir, "../main"))
 # Add the main directory to the system path
 sys.path.insert(0, main_dir)
 
 from juego_monedas import juego_monedas
 
+
 class TestJuegoMonedas(unittest.TestCase):
-    
+
     def test_ejemplo_5(self):
 
+        ganancia_esperada = 50 + 50 + 50
 
-        ganancia_esperada = 50+50+50
-        
         monedas = [50, 50, 15, 50, 25]
 
-        _, ganancia, _ = juego_monedas(monedas)      
+        _, ganancia, _ = juego_monedas(monedas)
 
         self.assertEqual(ganancia, ganancia_esperada)
 
@@ -34,7 +34,11 @@ class TestJuegoMonedas(unittest.TestCase):
         for _ in range(num_sorts):
             random.shuffle(monedas)
             _, suma_sophia, suma_mateo = juego_monedas(monedas)
-            self.assertGreaterEqual(suma_sophia, suma_mateo, f"Fallo, suma Mateo mayor a Sophia con monedas: {monedas}")
+            self.assertGreaterEqual(
+                suma_sophia,
+                suma_mateo,
+                f"Fallo, suma Mateo mayor a Sophia con monedas: {monedas}",
+            )
 
 
 if __name__ == "__main__":

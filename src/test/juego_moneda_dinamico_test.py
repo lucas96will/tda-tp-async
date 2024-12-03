@@ -7,7 +7,7 @@ import sys
 # Get the current file's directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 # Construct the path to the main directory
-main_dir = os.path.abspath(os.path.join(current_dir, '../main'))
+main_dir = os.path.abspath(os.path.join(current_dir, "../main"))
 # Add the main directory to the system path
 sys.path.insert(0, main_dir)
 

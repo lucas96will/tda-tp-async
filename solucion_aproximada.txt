@@ -1,0 +1,21 @@
+Archivo: 10_10_10.txt
+Solución Aproximada: 0.000000
+
+Archivo: 10_3_3.txt
+Solución Aproximada: 0.000000
+
+Archivo: 12_12_21.txt
+Solución Aproximada: 0.000000
+
+Archivo: 15_10_15.txt
+Solución Aproximada: 0.000000
+
+Archivo: 20_20_20.txt
+Solución Aproximada: 0.000000
+
+Archivo: 20_25_30.txt
+Solución Aproximada: 0.000725
+
+Archivo: 30_25_25.txt
+Solución Aproximada: 0.000005
+
